@@ -9,11 +9,11 @@ var drawBoard = function(){
 
     for(var j=0; j<4; j++){
       if(flag == 0){
-        board.innerHTML += '<div class = white, style="background-color : white"></div>'
+        board.innerHTML += '<div style = "background-color : white"></div>'
         flag++;
       }
       else{
-        board.innerHTML += '<div class = black, style="background-color : black"></div>'
+        board.innerHTML += '<div style = "background-color : black"></div>'
         flag--;
       }
     }

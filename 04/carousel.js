@@ -11,55 +11,59 @@ var todayPhoto = [
 
 var wrap = document.getElementById('wrap');
 var control = document.getElementById('control');
-var pageNum = 1;
+var pageNum = 1; //현재 페이지 번호
 var cntImg = 3; //한 화면에 보이는 이미지 개수
-var lastPage = Math.ceil(todayPhoto.length / cntImg);
-var btnPre = '<button id="pre"> < </button>'
-var pgNum = '<a id="number">'+pageNum+' </a><a> / '+lastPage+'</a>'
-var btnNext = '<button id="next"> > </button>'
-control.innerHTML = btnPre + pgNum + btnNext;
+var lastPage = Math.ceil(todayPhoto.length / cntImg); //마지막 페이지
+control.innerHTML = '<button id="pre"> < </button>' //이전 버튼
+                  + '<a id="number">'+pageNum+' </a><a> / '+lastPage+'</a>' //page index
+                  + '<button id="next"> > </button>' //다음 버튼
 
 var number = document.getElementById('number');
 var pre = document.getElementById('pre');
 var next = document.getElementById('next');
 
 function nextPage() {
-    var str = '';
+    var imgList = '';
     pageNum++;
     // console.log(pageNum);
     if(pageNum > lastPage) pageNum = lastPage;
-    var start = pageNum * cntImg - cntImg;
-    var end = pageNum * cntImg;
+
+    var start = pageNum * cntImg - cntImg; //시작 이미지 번호
+    var end = pageNum * cntImg; //끝 이미지 번호
+
     for(var i = start; i < end; i++) {
         if(i == todayPhoto.length) break;
-        str += '<img src="' + todayPhoto[i].img + '">';
+        imgList += '<img src="' + todayPhoto[i].img + '">';
     }
-    wrap.innerHTML = str;
+
+    wrap.innerHTML = imgList;
     number.innerHTML = pageNum;
 }
+next.addEventListener('click', nextPage);
 
 function prePage() {
-    var str = '';
+    var imgList = '';
     pageNum--;
     // console.log(pageNum);
     if(pageNum < 1) pageNum = 1;
+
     var start = pageNum * cntImg - cntImg;
     var end = pageNum * cntImg;
+
     for(var i = start; i < end; i++) {
         if(i == todayPhoto.length) break;
-        str += '<img src="' + todayPhoto[i].img+'">';
+        imgList += '<img src="' + todayPhoto[i].img+'">';
     }
-    wrap.innerHTML = str;
+
+    wrap.innerHTML = imgList;
     number.innerHTML = pageNum;
 }
+pre.addEventListener('click', prePage);
 
 window.addEventListener("load", function() {
-    var str = '';
+    var imgList = '';
     for(var i = 0; i < cntImg; i++) {
-        str += '<img src="' + todayPhoto[i].img+'">';
+        imgList += '<img src="' + todayPhoto[i].img+'">';
     }
-    wrap.innerHTML = str;
+    wrap.innerHTML = imgList;
 });
-
-next.addEventListener('click', nextPage);
-pre.addEventListener('click', prePage);

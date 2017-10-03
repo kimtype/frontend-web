@@ -6,24 +6,22 @@
   <link rel="stylesheet" href="todos.css">
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
 
-<div class="container">
-  <header>
-    <h1>Todo List</h1>
-
-    <form class="new-task">
-      <input type="text" name="text" placeholder="할일을 입력하세요">
-    </form>
-  </header>
-  <ul>
-    <li>
-      <button class="delete">×</button>
-      <input type="checkbox" class="toggle-checked">
-      <span class="text">JS공부하기</span>
-    </li>
-  </ul>
-
-</div>
-
+      <form class="new-task" onsubmit = "return false"><!-- input text가 주소값에 자동으로 submit 되어 페이지가 refresh되는 것을 방지-->
+        <input type="text" name="text" placeholder="할 일을 입력하세요">
+      </form>
+    </header>
+    <ul id = "list">
+      <!-- <li>
+        <button class="delete">×</button>
+        <input type="checkbox" class="toggle-checked">
+        <span class="text">JS공부하기</span>
+      </li> -->
+    </ul>
+  </div>
+  <script src = "todos.js"></script>
 </body>
 </html>

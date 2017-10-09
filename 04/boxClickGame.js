@@ -4,7 +4,7 @@ var scoreboard = document.getElementById('scoreboard');
 var score = 0; var maxScore = 5;
 var level = 1; var maxLv = 5;
 var miss = 0;
-var retargetingTime=[,2500,2000,1500,1000,500];
+var retargetingTime=[,2500,2000,1500,1250,1000];
 var tolerance=[,11,8,6,4,1];
 scoreboard.innerHTML = '<p>Score : <span id="score">'+score+'</span></p>'
                      + '<p>Level : <span id="level">'+level+'</span></p>'
@@ -20,7 +20,7 @@ var target = document.getElementById('target');
 
 //점수판 갱신
 var reScore = function(){
-  score = 0;
+  // score = 0;
   miss = 0;
   spanScore.innerHTML = score;
   spanLevel.innerHTML = level;
@@ -35,8 +35,9 @@ var fault = function(){
   miss++;
   // console.log(miss);
   if(miss>tolerance[level]){ //실수 허용 범위를 넘으면 stage failed
-    alert("Failed.. try again!");
+    alert("Failed.. try again! [score : "+score+"]");
     level = 1;
+    score = 0;
     reScore();
   }
   spanMiss.innerHTML = miss;
@@ -49,7 +50,7 @@ var arrest = function(){
   target.style.backgroundColor = '#0054FF';
   // setTimeout(relocation,retargetingTime[level]);
   score++;
-  if(score==maxScore){ //점수가 기준 점수를 넘으면 다음 스테이지로
+  if(score%maxScore==0){ //점수가 기준 점수를 넘으면 다음 스테이지로
     if(level != maxLv){
       setTimeout(function(){
         level++;
@@ -57,8 +58,9 @@ var arrest = function(){
       },200);
     }
     else{
-      alert("Congratulation~!");
+      alert("Congratulation~! [score : "+score+"]");
       level = 1;
+      score = 0;
       reScore();
     }
   }
@@ -76,11 +78,11 @@ var generateRandom = function (min, max) {
 //타겟 재배치
 var relocation = function(){
   target.style.backgroundColor = 'red';
-  var rndTop = generateRandom(0,550)+'px';
-  var rndLeft = generateRandom(0,700)+'px';
+  var rndTop = generateRandom(0,clickArea.scrollHeight - 50)+'px';
+  var rndLeft = generateRandom(0,clickArea.scrollWidth - 50)+'px';
   target.style.top = rndTop;
   target.style.left = rndLeft;
-  console.log(retargetingTime[level]);
+  //console.log(retargetingTime[level]);
   setTimeout(relocation,retargetingTime[level]);//재귀호출을 통한 화면 자동 갱신 level에 따라 재생성 시간 조절
 }
 

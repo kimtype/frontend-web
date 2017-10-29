@@ -1,3 +1,4 @@
+//jsonp 모듈
 var getJSON = (function(){
   var unique = 0;
   return function(url, callback, context) {

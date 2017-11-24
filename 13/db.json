@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "title": "어렵당",
+      "id": 1
+    },
+    {
+      "title": "어렵당",
+      "id": 2
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
